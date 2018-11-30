@@ -14,14 +14,18 @@
 
 document.getElementById("btn-test").addEventListener("click", function(){
   document.getElementById("data-list").innerHTML = "";
-  const URL = 'https://data.enseignementsup-recherche.gouv.fr//api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&facet=etablissement_lib&facet=diplome_rgp&facet=diplome_lib&facet=typ_diplome_lib&facet=diplom&rows=1000&refine.diplome=DUT';
+  let academy_field = document.getElementById("academy").value;
+  var URL = 'https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=1000&sort=-rentree_lib&facet=gd_disciscipline_lib&facet=discipline_lib&facet=aca_etab_lib&facet=reg_ins_lib&facet=dep_ins_lib&facet=diplome_rgp&facet=uucr_ins_lib&facet=uucr_ins&facet=libelle_intitule_1&facet=etablissement_lib';
+  URL += '&refine.aca_ins_lib=' + academy_field;
+  console.log(URL);
   $.getJSON(URL, function(result){
     let dataRecords = result["records"];
     console.log(dataRecords);
     $.each(dataRecords, function(i, item) {
-      document.getElementById("data-list").innerHTML += item.fields.gd_disciscipline_lib + " " + item.fields.aca_etab_lib + " " +
-      item.fields.reg_ins_lib + " " + item.fields.dep_ins_lib + " " + item.fields.diplome_rgp + " " + item.fields.uucr_ins_lib + " " +
-      item.fields.spec_dut_lib + " " + item.fields.etablissement_lib + "<br>"+"<br>";
+      document.getElementById("data-list").innerHTML += item.fields.gd_disciscipline_lib + " " + item.fields.discipline_lib + " "
+      + item.fields.aca_ins_lib + " " + item.fields.reg_ins_lib + " " + item.fields.dep_ins_lib + " " + item.fields.diplome_rgp
+       + " " + item.fields.uucr_ins_lib + " " + item.fields.uucr_ins + " " + item.fields.libelle_intitule_1 + " " + 
+       item.fields.etablissement_lib + "<br>"+"<br>";
     });
   });
 }); 
