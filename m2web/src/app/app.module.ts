@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule,
-   MatIconModule, MatListModule, MatFormFieldModule, MatCardModule, MatChipsModule, MatAutocompleteModule} from '@angular/material';
+   MatIconModule, MatListModule, MatFormFieldModule, MatCardModule, MatChipsModule,
+    MatSelectModule, MatAutocompleteModule, MatProgressSpinnerModule} from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AccountComponent } from './account/account.component';
@@ -24,6 +25,9 @@ import { SearchComponent } from './search/search.component';
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'search', component: SearchComponent},
+  {path: 'user', component: UserComponent},
+
+
 
 ];
 
@@ -54,6 +58,8 @@ const appRoutes: Routes = [
     MatInputModule,
     MatChipsModule,
     MatAutocompleteModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],
