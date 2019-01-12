@@ -18,6 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material';
 import { SearchComponent } from './search/search.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { SchoolsComponent } from './schools/schools.component';
+import { SchoolsService } from './schools/schools.service';
 
 
 
@@ -39,6 +41,7 @@ const appRoutes: Routes = [
     AccountComponent,
     UserComponent,
     LoginComponent,
+    SchoolsComponent,
     SearchComponent
   ],
   imports: [
@@ -65,6 +68,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
+    SchoolsService
   ],
   bootstrap: [AppComponent]
 })
