@@ -17,8 +17,7 @@ export class SearchComponent implements OnInit {
   private searchRegions = new FormControl('');
   private searchDepartments = new FormControl('');
   private searchCities = new FormControl('');
-  private searchDilomaT = new FormControl('');
-  private searchDilomaM = new FormControl('');
+  private searchDiplomaT = new FormControl('');
   private names  = [];
   private mainfields  = [];
   private subfields  = [];
@@ -27,7 +26,6 @@ export class SearchComponent implements OnInit {
   private departments  = [];
   private cities  = [];
   private diploma_types  = [];
-  private diploma_names  = [];
 
   private url =  `https://data.enseignementsup-recherche.gouv.fr/api/v2/catalog/datasets/fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics/aggregates?select=`;
 
@@ -76,11 +74,6 @@ export class SearchComponent implements OnInit {
       .subscribe((res: any[]) =>{
           console.log(res);
           this.diploma_types = res[`aggregations`];
-          });
-  this.http.get((this.url) + `libelle_intitule_1&group_by=libelle_intitule_1`)
-      .subscribe((res: any[]) =>{
-          console.log(res);
-          this.diploma_names = res[`aggregations`];
           });
     console.log(`Init finished`);
   }
