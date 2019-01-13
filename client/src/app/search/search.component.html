@@ -1,4 +1,4 @@
-<form class="example-form" >
+<!-- <form class="example-form" >
   <mat-form-field class="example-full-width" style="width: 100%">
     <mat-chip-list #chipList>
       <mat-chip style="margin-top:0.4em;" *ngFor="let option of  this.dataService.searchOption" (removed)="removeOption(option)">
@@ -17,12 +17,12 @@
     </mat-chip-list>
   
   </mat-form-field>
-  </form>
+  </form> -->
     <mat-card-actions>
       <button mat-raised-button (click)="getAllSchools()" color="primary">Ecoles test</button>	
     </mat-card-actions>
     <ul>
-      <li *ngFor="let school of schools" >
-        -- name: {{school.fields.etablissement_lib}}
+      <li *ngFor="let name of diploma_names" >
+        -- name: {{name.libelle_intitule_1}}
       </li>
     </ul> 
