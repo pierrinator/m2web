@@ -10,14 +10,14 @@ import { FormControl } from '@angular/forms';
 })
 export class SearchComponent implements OnInit {
   
-  private searchName = new FormControl('');
-  private searchMfields = new FormControl('');
-  private searchSfields = new FormControl('');
-  private searchAcademies = new FormControl('');
-  private searchRegions = new FormControl('');
-  private searchDepartments = new FormControl('');
-  private searchCities = new FormControl('');
-  private searchDiplomaT = new FormControl('');
+  private selectedName: string;
+  private selectedMainfield: string;
+  private selectedSubfield: string;
+  private selectedAcademy: string;
+  private selectedRegion: string;
+  private selectedDepartment: string;
+  private selectedCity: string;
+  private selectedDiplomaT: string;
   private names  = [];
   private mainfields  = [];
   private subfields  = [];
@@ -31,7 +31,16 @@ export class SearchComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  getAllSchools() {
+  search  () {
+    console.log(this.selectedName);
+    console.log(this.selectedMainfield);
+    console.log(this.selectedSubfield);
+    console.log(this.selectedAcademy);
+    console.log(this.selectedRegion);
+    console.log(this.selectedDepartment);
+    console.log(this.selectedCity);
+    console.log(this.selectedDiplomaT);
+
       }
 
   ngOnInit() {
