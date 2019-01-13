@@ -1,0 +1,8 @@
+<mat-card-actions>
+	<button mat-raised-button (click)="getAllSchools()" color="primary">Ecoles test</button>	
+</mat-card-actions>
+<ul>
+	<li *ngFor="let name of schools" >
+    	-- name: {{name.school_id}}
+    </li>
+</ul>     

@@ -1,28 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import {SchoolsService} from './schools.service';
-import {School} from './schools.interface';
-import {Router} from "@angular/router";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-schools',
   templateUrl: './schools.component.html',
   styleUrls: ['./schools.component.css']
 })
+
 export class SchoolsComponent implements OnInit {
 
-  Schools: School[];
+  private schools  = [];
 
-  constructor(private schoolsservice: SchoolsService, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.schoolsservice
-      .getSchools().subscribe((data: School[]) => {
-        this.Schools = data;
-      });
   }
 
-  goToAddMatiere () {
-    this.router.navigateByUrl('/ajout-matiere');
+  getAllSchools() {
+  	this.http.get(`http://localhost:3000/school`)
+  .subscribe((res: any[]) =>{
+      console.log(res);
+      this.schools = res;
+       });
   }
 
 }

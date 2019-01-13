@@ -19,7 +19,6 @@ import { MatInputModule } from '@angular/material';
 import { SearchComponent } from './search/search.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SchoolsComponent } from './schools/schools.component';
-import { SchoolsService } from './schools/schools.service';
 
 
 
@@ -29,7 +28,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'search', component: SearchComponent},
   {path: 'user', component: UserComponent},
-
+  {path: 'schools', component: SchoolsComponent}
 
 
 ];
@@ -68,7 +67,6 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    SchoolsService
   ],
   bootstrap: [AppComponent]
 })
