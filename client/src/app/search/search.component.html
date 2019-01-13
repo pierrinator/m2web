@@ -1,28 +1,73 @@
-<!-- <form class="example-form" >
-  <mat-form-field class="example-full-width" style="width: 100%">
-    <mat-chip-list #chipList>
-      <mat-chip style="margin-top:0.4em;" *ngFor="let option of  this.dataService.searchOption" (removed)="removeOption(option)">
-  
-        <span>{{option.title}}</span>
-        
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-      <input #autocompleteInput type="text" placeholder="Enter title" aria-label="Number" matInput [formControl]="myControl"
-        [matAutocomplete]="auto" [matChipInputFor]="chipList">
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-        <mat-option *ngFor="let option of autoCompleteList" [value]="option" (onSelectionChange)="filterPostList($event)">
-          {{option.title}}
+<mat-form-field>
+  <input type="text" matInput [formControl]="searchName" [matAutocomplete]="namesAC">
+</mat-form-field>
+  <mat-autocomplete #namesAC="matAutocomplete">
+  <mat-option *ngFor="let option of names" [value]="option.etablissement_lib">
+    {{ option.etablissement_lib }}
+  </mat-option>
+</mat-autocomplete>
+<mat-form-field>
+  <input type="text" matInput [formControl]="searchMfields" [matAutocomplete]="MfieldsAC">
+</mat-form-field>
+<mat-autocomplete #MfieldsAC="matAutocomplete">
+  <mat-option *ngFor="let option of mainfields" [value]="option.gd_disciscipline_lib">
+    {{ option.gd_disciscipline_lib }}
+  </mat-option>
+</mat-autocomplete>
+<mat-form-field>
+  <input type="text" matInput [formControl]="searchSfields" [matAutocomplete]="SfieldsAC">
+</mat-form-field>
+<mat-autocomplete #SfieldsAC="matAutocomplete">
+  <mat-option *ngFor="let option of subfields" [value]="option.discipline_lib">
+    {{ option.discipline_lib }}
+  </mat-option>
+</mat-autocomplete>
+<mat-form-field>
+  <input type="text" matInput [formControl]="searchAcademies" [matAutocomplete]="academiesAC">
+</mat-form-field>
+<mat-autocomplete #academiesAC="matAutocomplete">
+  <mat-option *ngFor="let option of academies" [value]="option.aca_etab_lib">
+    {{ option.aca_etab_lib }}
+  </mat-option>
+</mat-autocomplete>
+<mat-form-field>
+<input type="text" matInput [formControl]="searchRegions" [matAutocomplete]="regionsAC">
+</mat-form-field>
+<mat-autocomplete #regionsAC="matAutocomplete">
+  <mat-option *ngFor="let option of regions" [value]="option.reg_ins_lib">
+    {{ option.reg_ins_lib }}
+  </mat-option>
+</mat-autocomplete>
+<mat-form-field>
+  <input type="text" matInput [formControl]="searchDepartments" [matAutocomplete]="departmentsAC">
+  </mat-form-field>
+  <mat-autocomplete #departmentsAC="matAutocomplete">
+    <mat-option *ngFor="let option of departments" [value]="option.dep_ins_lib">
+      {{ option.dep_ins_lib }}
+    </mat-option>
+  </mat-autocomplete>
+  <mat-form-field>
+    <input type="text" matInput [formControl]="searchCities" [matAutocomplete]="citiesAC">
+    </mat-form-field>
+    <mat-autocomplete #citiesAC="matAutocomplete">
+      <mat-option *ngFor="let option of cities" [value]="option.uucr_ins_lib">
+        {{ option.uucr_ins_lib }}
+      </mat-option>
+    </mat-autocomplete>
+  <mat-form-field>
+    <input type="text" matInput [formControl]="searchDiplomaT" [matAutocomplete]="diplomaTAC">
+    </mat-form-field>
+    <mat-autocomplete #diplomaTAC="matAutocomplete">
+      <mat-option *ngFor="let option of diploma_types" [value]="option.diplome_rgp">
+        {{ option.diplome_rgp }}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-form-field>
+      <input type="text" matInput [formControl]="searchDiplomaN" [matAutocomplete]="diplomaNAC">
+      </mat-form-field>
+      <mat-autocomplete #diplomaNAC="matAutocomplete">
+        <mat-option *ngFor="let option of diploma_names" [value]="option.libelle_intitule_1">
+          {{ option.libelle_intitule_1 }}
         </mat-option>
       </mat-autocomplete>
-    </mat-chip-list>
-  
-  </mat-form-field>
-  </form> -->
-    <mat-card-actions>
-      <button mat-raised-button (click)="getAllSchools()" color="primary">Ecoles test</button>	
-    </mat-card-actions>
-    <ul>
-      <li *ngFor="let name of diploma_names" >
-        -- name: {{name.libelle_intitule_1}}
-      </li>
-    </ul> 
+

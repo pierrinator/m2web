@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-search',
@@ -7,7 +9,16 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-
+  
+  private searchName = new FormControl('');
+  private searchMfields = new FormControl('');
+  private searchSfields = new FormControl('');
+  private searchAcademies = new FormControl('');
+  private searchRegions = new FormControl('');
+  private searchDepartments = new FormControl('');
+  private searchCities = new FormControl('');
+  private searchDilomaT = new FormControl('');
+  private searchDilomaM = new FormControl('');
   private names  = [];
   private mainfields  = [];
   private subfields  = [];
