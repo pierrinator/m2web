@@ -68,7 +68,7 @@ const appRoutes: Routes = [
     MatProgressSpinnerModule,
     RouterModule.forRoot(appRoutes),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDXSIBC1hmTWtDunXrhp_wiE7Nx5uMqSIc',
+      apiKey: '',
       libraries: ['places']
     }),
     NgbModule.forRoot() // <---
