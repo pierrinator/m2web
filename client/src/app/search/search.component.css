@@ -5,3 +5,7 @@ table {
 mat-form-field {
   width: 50%;
 }
+
+agm-map {
+  height: 700px;
+}
