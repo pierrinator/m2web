@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule,
    MatIconModule, MatListModule, MatFormFieldModule, MatCardModule, MatChipsModule,
-    MatSelectModule, MatAutocompleteModule, MatProgressSpinnerModule} from '@angular/material';
+    MatSelectModule, MatAutocompleteModule, MatProgressSpinnerModule, MatTableModule} from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AccountComponent } from './account/account.component';
@@ -19,9 +19,6 @@ import { MatInputModule } from '@angular/material';
 import { SearchComponent } from './search/search.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SchoolsComponent } from './schools/schools.component';
-
-
-
 
 
 const appRoutes: Routes = [
@@ -58,6 +55,7 @@ const appRoutes: Routes = [
     MatListModule,
     MatFormFieldModule,
     MatCardModule,
+    MatTableModule,
     FormsModule,
     MatInputModule,
     MatChipsModule,
