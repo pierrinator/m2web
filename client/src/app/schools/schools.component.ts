@@ -34,15 +34,20 @@ export class SchoolsComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  ngOnInit() {
-  }
-
   getAllSchools() {
-  	this.http.get(`http://localhost:3000/school`)
-  .subscribe((res: any[]) =>{
+    this.http.get(`http://localhost:3000/school`)
+    .subscribe((res: any[]) =>{
       console.log(res);
       this.schools = res;
-       });
+    });
   }
 
+  deleteSchools() {
+    this.getAllSchools();
+  }
+
+  ngOnInit() {
+    this.getAllSchools();
+  }
+  
 }
