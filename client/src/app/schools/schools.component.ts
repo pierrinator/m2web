@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {SelectionModel} from '@angular/cdk/collections';
-import {MatTableDataSource} from '@angular/material';
+import {School} from './schools.interface';
 
 @Component({
   selector: 'app-schools',
@@ -11,37 +11,39 @@ import {MatTableDataSource} from '@angular/material';
 
 export class SchoolsComponent implements OnInit {
 
-  private schools  = [];
+  private schools: School[] = [];
+  private schoolsGet  = [];
 
-  displayedColumns: string[] = ['school_id', 'school_name', 'main_field', 'sub_field', 'academy',
+  displayedColumns: string[] = ['checked', 'school_id', 'school_name', 'main_field', 'sub_field', 'academy',
    'region', 'department', 'city', 'type_diploma', 'diploma_name'];
-   dataSource = new MatTableDataSource<any>(this.schools);
-   selection = new SelectionModel<any>(true, []);
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
-  }
 
   constructor(private http: HttpClient) { }
 
   getAllSchools() {
     this.http.get(`http://localhost:3000/school`)
     .subscribe((res: any[]) =>{
-      this.schools = res;
+      this.schools = [];
+      this.schoolsGet = res;
+      for(let item of this.schoolsGet) {
+        let school = {checked: false, school_id: item.school_id, school_name: item.school_name, main_field: item.main_field, sub_field: item.sub_field, academy: item.academy, region: item.region, department: item.department, city: item.city, type_diploma: item.type_diploma, diploma_name: item.diploma_name};
+
+        this.schools.push(school);
+      }
     });
   }
 
   deleteSchools() {
+    let url = 'http://localhost:3000/school/';
+    for(let item of this.schools) {
+      if(item.checked) {
+        this.http.delete(url+item.school_id)
+       .subscribe((res: any[]) =>{
+        
+        }); 
+      }
+    }
+    
+
     this.getAllSchools();
   }
 

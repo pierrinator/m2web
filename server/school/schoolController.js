@@ -35,7 +35,7 @@ router.post('/', function (req, res) {
             res.status(500).json(err);
         }
         else{
-            res.status(201).send('School added succesfully !');
+            res.status(201).json(success);
         }
     });
 });
@@ -47,7 +47,7 @@ router.delete('/:id', function (req, res) {
             res.status(500).json(err);
         }
         else{
-            res.status(200).send('School deleted succesfully !');
+            res.status(200).json(success);
         }
     });
 });
