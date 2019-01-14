@@ -12,7 +12,6 @@ import {School} from './schools.interface';
 export class SchoolsComponent implements OnInit {
 
   private schools: School[] = [];
-  private schoolsGet  = [];
 
   displayedColumns: string[] = ['checked', 'school_id', 'school_name', 'main_field', 'sub_field', 'academy',
    'region', 'department', 'city', 'type_diploma', 'diploma_name'];
@@ -23,8 +22,8 @@ export class SchoolsComponent implements OnInit {
     this.http.get(`http://localhost:3000/school`)
     .subscribe((res: any[]) =>{
       this.schools = [];
-      this.schoolsGet = res;
-      for(let item of this.schoolsGet) {
+      let schoolsGet = res;
+      for(let item of schoolsGet) {
         let school = {checked: false, school_id: item.school_id, school_name: item.school_name, main_field: item.main_field, sub_field: item.sub_field, academy: item.academy, region: item.region, department: item.department, city: item.city, type_diploma: item.type_diploma, diploma_name: item.diploma_name};
 
         this.schools.push(school);
@@ -38,13 +37,12 @@ export class SchoolsComponent implements OnInit {
       if(item.checked) {
         this.http.delete(url+item.school_id)
        .subscribe((res: any[]) =>{
-        
+          
         }); 
       }
     }
-    
-
     this.getAllSchools();
+
   }
 
   ngOnInit() {

@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material';
-
+import {Search} from './search.interface';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -39,18 +40,16 @@ export class SearchComponent implements OnInit {
   static initCities  = [];
   static initDiploma_types  = [];
 
-  private resSearch = [];
+  private resSearch: Search[] = [];
 
   private url =  `https://data.enseignementsup-recherche.gouv.fr/api/v2/catalog/datasets/fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics/aggregates?select=`;
 
-  displayedColumns: string[] = ['school_name', 'main_field', 'sub_field', 'academy',
+  displayedColumns: string[] = ['checked', 'school_name', 'main_field', 'sub_field', 'academy',
    'region', 'department', 'city', 'type_diploma', 'diploma_name'];
-   dataSource = new MatTableDataSource<any>(this.resSearch);
-   selection = new SelectionModel<any>(true, []);
 
    static initOptions = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
 
   }
 
@@ -85,13 +84,32 @@ export class SearchComponent implements OnInit {
 
     this.http.get(urlGet)
     .subscribe((res: any[]) =>{
-       this.resSearch = res[`records`];
+      this.resSearch = [];
+      let resTmp = res[`records`];
+      for(let item of resTmp) {
+        if(item.fields.etablissement_lib != undefined && item.fields.gd_disciscipline_lib != undefined && item.fields.discipline_lib != undefined && item.fields.aca_etab_lib != undefined && item.fields.reg_ins_lib != undefined && item.fields.dep_ins_lib != undefined && item.fields.uucr_ins_lib != undefined && item.fields.diplome_rgp && item.fields.libelle_intitule_1 != undefined) {
+        
+          let school = {checked: false, school_name: item.fields.etablissement_lib, main_field: item.fields.gd_disciscipline_lib, sub_field: item.fields.discipline_lib, academy: item.fields.aca_etab_lib, region: item.fields.reg_ins_lib, department: item.fields.dep_ins_lib, city: item.fields.uucr_ins_lib, type_diploma: item.fields.diplome_rgp, diploma_name: item.fields.libelle_intitule_1};
+
+          this.resSearch.push(school);
+        }
+        
+      }
     });  
 
   }
 
   saveSchools() {
+    for(let item of this.resSearch) {
+      if(item.checked) {
+        let school = {school_name: item.school_name, main_field: item.main_field, sub_field: item.sub_field, academy: item.academy, region: item.region, department: item.department, city: item.city, type_diploma: item.type_diploma, diploma_name: item.diploma_name};
 
+        this.http.post('http://localhost:3000/school', school)
+       .subscribe((res: any) =>{
+          console.log(res);
+        }); 
+      }
+    }
   }
 
   ngOnInit() {
