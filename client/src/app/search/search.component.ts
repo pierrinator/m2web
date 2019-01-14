@@ -54,7 +54,7 @@ export class SearchComponent implements OnInit {
 
   }
 
-  search  () {
+  search() {
     let urlGet = 'https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=100&sort=-rentree_lib&facet=gd_disciscipline_lib&facet=discipline_lib&facet=aca_etab_lib&facet=reg_ins_lib&facet=dep_ins_lib&facet=diplome_rgp&facet=uucr_ins_lib&facet=libelle_intitule_1&facet=etablissement_lib';
 
     if(this.selectedName != undefined) {
@@ -88,7 +88,11 @@ export class SearchComponent implements OnInit {
        this.resSearch = res[`records`];
     });  
 
-    }
+  }
+
+  saveSchools() {
+
+  }
 
   ngOnInit() {
     if(!SearchComponent.initOptions) {
