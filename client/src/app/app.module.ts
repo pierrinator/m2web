@@ -21,8 +21,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SchoolsComponent } from './schools/schools.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MapsService } from './maps.service';
-import { LocationsService } from './locations.service';
 
 
 const appRoutes: Routes = [

@@ -1,5 +1,6 @@
-/// <reference types="googlemaps" />
-import { Component, Input, ViewChild, NgZone, OnInit, ElementRef, AfterViewInit } from '@angular/core';
+/// <reference types="@types/googlemaps" />
+
+import { Component, Input, ViewChild, NgZone, OnInit, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -7,28 +8,25 @@ import {MatTableDataSource} from '@angular/material';
 import {Search} from './search.interface';
 import {Router} from '@angular/router';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
-import { LocationsService } from '../locations.service';
-import { MapsService } from '../maps.service';
-import { GoogleMapsAPIWrapper } from '@agm/core/services';
-declare const google: any;
+
+
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit, AfterViewInit {
+export class SearchComponent implements OnInit {
 
+  public latitude: number;
+  public longitude: number;
   public searchControl: FormControl;
-
-  @ViewChild('search') public searchElementRef: ElementRef;
-
-  public lat: number;
-  public lng: number;
   public zoom: number;
+  public input: HTMLInputElement;
 
-  public openedWindow: number;
-  
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+ 
   private selectedName: string;
   private selectedMainfield: string;
   private selectedSubfield: string;
@@ -65,9 +63,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
    static initOptions = false;
 
-  constructor(private http: HttpClient,private locationService: LocationsService,
-    private mapApiLoader: MapsAPILoader,
-    private mapsService: MapsService,  private ngZone: NgZone, private router: Router) {
+  constructor(private http: HttpClient, private ngZone: NgZone, private mapsAPILoader: MapsAPILoader, private router: Router) {
        }
 
   filter() {
@@ -140,37 +136,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   localize(s: Search) {
-    console.log(s.school_name);
-    console.log(s.city);
+    this.searchControl.setValue(s.city);
   }
 
   ngOnInit() {
-
-    this.searchControl = new FormControl();
-    this.lat = this.mapsService.lat;
-    this.lng = this.mapsService.lng;
-    this.zoom = this.mapsService.zoom;
-
-    this.setCurrentPosition();
-    this.mapApiLoader.load();
-
-  
-    this.mapsService.newCoordinators.subscribe(
-      (coords: { lat: number, lng: number, zoom: number }) => {
-        if (coords) {
-          this.lat = coords.lat;
-          this.lng = coords.lng;
-          this.zoom = coords.zoom;
-          this.mapApiLoader.load();
-        }
-      }
-    );
-    // Open window after click on panel
-    this.mapsService.openWindow.subscribe(
-      index => {
-        this.openedWindow = +index;
-      }
-    );
 
     if(!SearchComponent.initOptions) {
       this.http.get((this.url) + `etablissement_lib&group_by=etablissement_lib`)
@@ -227,38 +196,50 @@ export class SearchComponent implements OnInit, AfterViewInit {
       this.cities = SearchComponent.initCities;
       this.diploma_types = SearchComponent.initDiploma_types;
     }
+    //set google maps defaults
+    this.zoom = 4;
+    this.latitude = 39.8282;
+    this.longitude = -98.5795;
 
-    
+    //create search FormControl
+    this.searchControl = new FormControl();
+
+    //set current position
+    this.setCurrentPosition();
+
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: []
+      });
+
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
+
   }
-
-  mapClicked($event: MouseEvent) {
-    console.log($event);
-  }
-
-  clickedMarker(label: string, index: number) {
-    console.log(`Clicked the marker: ${label || index}`);
-    this.openedWindow = index;
-  }
-
   private setCurrentPosition() {
-    if ('geolocation' in navigator) {
+    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.lat = this.mapsService.lat = position.coords.latitude;
-        this.lng = this.mapsService.lng = position.coords.longitude;
-        this.zoom = 10;
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 12;
       });
     }
-
-    // @Todo: resort the locations
-  }
-
-  isInfoWindowOpen(index: number) {
-    return this.openedWindow === index;
-  }
-
-  ngAfterViewInit(): void {
-    const test = google.maps.places.FindPlaceFromQueryRequest("Bordeaux");
-
   }
 
 }
