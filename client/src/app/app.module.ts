@@ -72,8 +72,7 @@ const appRoutes: Routes = [
     NgbModule.forRoot() // <---
   ],
   providers: [
-    GoogleMapsAPIWrapper,
-    LocationsService, MapsService
+    GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent]
 })
