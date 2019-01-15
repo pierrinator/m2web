@@ -13,7 +13,7 @@ export class SchoolsComponent implements OnInit {
 
   private schools: School[] = [];
 
-  displayedColumns: string[] = ['checked', 'school_id', 'school_name', 'main_field', 'sub_field', 'academy',
+  displayedColumns: string[] = ['checked', 'school_name', 'main_field', 'sub_field', 'academy',
    'region', 'department', 'city', 'type_diploma', 'diploma_name'];
 
   constructor(private http: HttpClient) { }

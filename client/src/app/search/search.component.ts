@@ -219,7 +219,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     }
     else {
       this.names = SearchComponent.initNames;
-      this.mainfields = SearchComponent.initMainfields; 
+      this.mainfields = SearchComponent.initMainfields;
       this.subfields = SearchComponent.initSubfields;
       this.academies = SearchComponent.initAcademies;
       this.regions = SearchComponent.initRegions;
@@ -259,6 +259,112 @@ export class SearchComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     const test = google.maps.places.FindPlaceFromQueryRequest("Bordeaux");
 
+  }
+
+
+
+  handler_school_name(o: any) {
+    let result = [];
+    this.http.get((this.url) + `aca_etab_lib&group_by=aca_etab_lib` + '&where=etablissement_lib%3D%22'+o.etablissement_lib+'%22')
+      .subscribe((res: any[]) =>{
+        result = res['aggregations'];
+        this.selectedAcademy = result[0].aca_etab_lib;
+      });
+    this.http.get((this.url) + `reg_ins_lib&group_by=reg_ins_lib` + '&where=etablissement_lib%3D%22'+o.etablissement_lib+'%22')
+      .subscribe((res: any[]) =>{
+        result = res['aggregations'];
+        this.selectedRegion = result[0].reg_ins_lib;
+      });
+    this.http.get((this.url) + `dep_ins_lib&group_by=dep_ins_lib` + '&where=etablissement_lib%3D%22'+o.etablissement_lib+'%22')
+      .subscribe((res: any[]) =>{
+        result = res['aggregations'];
+        this.selectedDepartment = result[0].dep_ins_lib;
+      });
+    this.http.get((this.url) + `uucr_ins_lib&group_by=uucr_ins_lib` + '&where=etablissement_lib%3D%22'+o.etablissement_lib+'%22')
+      .subscribe((res: any[]) =>{
+        result = res['aggregations'];
+        this.selectedCity = result[0].uucr_ins_lib;
+      });
+  }
+
+  handler_main_field(o: any) {
+    if(o == undefined) {
+      this.subfields = SearchComponent.initSubfields;
+    }
+    else{
+      this.selectedSubfield = undefined;
+      this.http.get((this.url) + `discipline_lib&group_by=discipline_lib` + '&where=gd_disciscipline_lib%3D%22'+o.gd_disciscipline_lib+'%22')
+      .subscribe((res: any[]) =>{
+        this.subfields = res['aggregations'];
+      });
+    }
+  }
+  
+  handler_sub_field(o: any) {
+    let result = [];
+    this.http.get((this.url) + `gd_disciscipline_lib&group_by=gd_disciscipline_lib` + '&where=discipline_lib%3D%22'+o.discipline_lib+'%22')
+      .subscribe((res: any[]) =>{
+        result = res['aggregations'];
+        this.selectedMainfield = result[0].gd_disciscipline_lib;
+      });
+  }
+
+  handler_academy(o: any) {
+      this.selectedName = undefined;
+      this.selectedCity = undefined;
+      this.selectedDepartment = undefined;
+      this.selectedRegion = undefined;
+  }  
+
+  handler_region(o: any) {
+    let result = [];
+    this.http.get((this.url) + `aca_etab_lib&group_by=aca_etab_lib` + '&where=reg_ins_lib%3D%22'+o.reg_ins_lib+'%22')
+      .subscribe((res: any[]) =>{
+        result = res['aggregations'];
+        this.selectedAcademy = result[0].aca_etab_lib;
+      });
+
+      this.selectedName = undefined;
+      this.selectedCity = undefined;
+      this.selectedDepartment = undefined;
+  }  
+
+  handler_department(o: any) {
+    let result = [];
+    this.http.get((this.url) + `aca_etab_lib&group_by=aca_etab_lib` + '&where=dep_ins_lib%3D%22'+o.dep_ins_lib+'%22')
+      .subscribe((res: any[]) =>{
+        result = res['aggregations'];
+        this.selectedAcademy = result[0].aca_etab_lib;
+      });
+    this.http.get((this.url) + `reg_ins_lib&group_by=reg_ins_lib` + '&where=dep_ins_lib%3D%22'+o.dep_ins_lib+'%22')
+      .subscribe((res: any[]) =>{
+        result = res['aggregations'];
+        this.selectedRegion = result[0].reg_ins_lib;
+      });
+
+      this.selectedName = undefined;
+      this.selectedCity = undefined;
+  }
+
+  handler_city(o: any) {
+    let result = [];
+    this.http.get((this.url) + `aca_etab_lib&group_by=aca_etab_lib` + '&where=uucr_ins_lib%3D%22'+o.uucr_ins_lib+'%22')
+      .subscribe((res: any[]) =>{
+        result = res['aggregations'];
+        this.selectedAcademy = result[0].aca_etab_lib;
+      });
+    this.http.get((this.url) + `reg_ins_lib&group_by=reg_ins_lib` + '&where=uucr_ins_lib%3D%22'+o.uucr_ins_lib+'%22')
+      .subscribe((res: any[]) =>{
+        result = res['aggregations'];
+        this.selectedRegion = result[0].reg_ins_lib;
+      });
+    this.http.get((this.url) + `dep_ins_lib&group_by=dep_ins_lib` + '&where=uucr_ins_lib%3D%22'+o.uucr_ins_lib+'%22')
+      .subscribe((res: any[]) =>{
+        result = res['aggregations'];
+        this.selectedDepartment = result[0].dep_ins_lib;
+      });
+
+      this.selectedName = undefined;
   }
 
 }
