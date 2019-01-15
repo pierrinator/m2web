@@ -67,7 +67,7 @@ export class SearchComponent implements OnInit {
        }
 
   filter() {
-    let urlGet = 'https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=100&sort=-rentree_lib&facet=gd_disciscipline_lib&facet=discipline_lib&facet=aca_etab_lib&facet=reg_ins_lib&facet=dep_ins_lib&facet=diplome_rgp&facet=uucr_ins_lib&facet=libelle_intitule_1&facet=etablissement_lib';
+    let urlGet = 'https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=50&sort=-rentree_lib&facet=gd_disciscipline_lib&facet=discipline_lib&facet=aca_etab_lib&facet=reg_ins_lib&facet=dep_ins_lib&facet=diplome_rgp&facet=uucr_ins_lib&facet=libelle_intitule_1&facet=etablissement_lib';
 
     if(this.selectedName != undefined) {
       urlGet += '&refine.etablissement_lib=' + this.selectedName;
@@ -291,27 +291,85 @@ export class SearchComponent implements OnInit {
   }
 
   handler_academy(o: any) {
+    if(o == undefined) {
+      this.names = SearchComponent.initNames;
+      this.cities = SearchComponent.initCities;
+      this.departments = SearchComponent.initDepartments;
+      this.regions = SearchComponent.initRegions;
+    }
+
+    else {
       this.selectedName = undefined;
       this.selectedCity = undefined;
       this.selectedDepartment = undefined;
       this.selectedRegion = undefined;
+
+      this.http.get((this.url) + `etablissement_lib&group_by=etablissement_lib` + '&where=aca_etab_lib%3D%22'+o.aca_etab_lib+'%22')
+      .subscribe((res: any[]) =>{
+        this.names = res['aggregations'];
+      });
+      this.http.get((this.url) + `uucr_ins_lib&group_by=uucr_ins_lib` + '&where=aca_etab_lib%3D%22'+o.aca_etab_lib+'%22')
+      .subscribe((res: any[]) =>{
+        this.cities = res['aggregations'];
+      });
+      this.http.get((this.url) + `dep_ins_lib&group_by=dep_ins_lib` + '&where=aca_etab_lib%3D%22'+o.aca_etab_lib+'%22')
+      .subscribe((res: any[]) =>{
+        this.departments = res['aggregations'];
+      });
+      this.http.get((this.url) + `reg_ins_lib&group_by=reg_ins_lib` + '&where=aca_etab_lib%3D%22'+o.aca_etab_lib+'%22')
+      .subscribe((res: any[]) =>{
+        this.regions = res['aggregations'];
+      });
+       
+    }
+    
   }  
 
   handler_region(o: any) {
-    let result = [];
+    if(o == undefined) {
+      this.names = SearchComponent.initNames;
+      this.cities = SearchComponent.initCities;
+      this.departments = SearchComponent.initDepartments;
+    }
+
+    else {
+      this.selectedName = undefined;
+      this.selectedCity = undefined;
+      this.selectedDepartment = undefined;
+
+      let result = [];
     this.http.get((this.url) + `aca_etab_lib&group_by=aca_etab_lib` + '&where=reg_ins_lib%3D%22'+o.reg_ins_lib+'%22')
       .subscribe((res: any[]) =>{
         result = res['aggregations'];
         this.selectedAcademy = result[0].aca_etab_lib;
       });
 
-      this.selectedName = undefined;
-      this.selectedCity = undefined;
-      this.selectedDepartment = undefined;
+      this.http.get((this.url) + `etablissement_lib&group_by=etablissement_lib` + '&where=reg_ins_lib%3D%22'+o.reg_ins_lib+'%22')
+      .subscribe((res: any[]) =>{
+        this.names = res['aggregations'];
+      });
+      this.http.get((this.url) + `uucr_ins_lib&group_by=uucr_ins_lib` + '&where=reg_ins_lib%3D%22'+o.reg_ins_lib+'%22')
+      .subscribe((res: any[]) =>{
+        this.cities = res['aggregations'];
+      });
+      this.http.get((this.url) + `dep_ins_lib&group_by=dep_ins_lib` + '&where=reg_ins_lib%3D%22'+o.reg_ins_lib+'%22')
+      .subscribe((res: any[]) =>{
+        this.departments = res['aggregations'];
+      });
+    }
+    
   }  
 
   handler_department(o: any) {
-    let result = [];
+    if(o == undefined) {
+      this.names = SearchComponent.initNames;
+      this.cities = SearchComponent.initCities;
+    }
+    else {
+      this.selectedName = undefined;
+      this.selectedCity = undefined;
+
+      let result = [];
     this.http.get((this.url) + `aca_etab_lib&group_by=aca_etab_lib` + '&where=dep_ins_lib%3D%22'+o.dep_ins_lib+'%22')
       .subscribe((res: any[]) =>{
         result = res['aggregations'];
@@ -323,12 +381,26 @@ export class SearchComponent implements OnInit {
         this.selectedRegion = result[0].reg_ins_lib;
       });
 
-      this.selectedName = undefined;
-      this.selectedCity = undefined;
+
+      this.http.get((this.url) + `etablissement_lib&group_by=etablissement_lib` + '&where=dep_ins_lib%3D%22'+o.dep_ins_lib+'%22')
+      .subscribe((res: any[]) =>{
+        this.names = res['aggregations'];
+      });
+      this.http.get((this.url) + `uucr_ins_lib&group_by=uucr_ins_lib` + '&where=dep_ins_lib%3D%22'+o.dep_ins_lib+'%22')
+      .subscribe((res: any[]) =>{
+        this.cities = res['aggregations'];
+      });
+    }
+    
   }
 
   handler_city(o: any) {
-    let result = [];
+    if(o == undefined) {
+      this.names = SearchComponent.initNames;
+    }
+    else{
+      this.selectedName = undefined;
+      let result = [];
     this.http.get((this.url) + `aca_etab_lib&group_by=aca_etab_lib` + '&where=uucr_ins_lib%3D%22'+o.uucr_ins_lib+'%22')
       .subscribe((res: any[]) =>{
         result = res['aggregations'];
@@ -345,7 +417,13 @@ export class SearchComponent implements OnInit {
         this.selectedDepartment = result[0].dep_ins_lib;
       });
 
-      this.selectedName = undefined;
+      this.http.get((this.url) + `etablissement_lib&group_by=etablissement_lib` + '&where=uucr_ins_lib%3D%22'+o.uucr_ins_lib+'%22')
+      .subscribe((res: any[]) =>{
+        this.names = res['aggregations'];
+      });
+    }
+
+    
   }
 
 }

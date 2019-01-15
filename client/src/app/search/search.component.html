@@ -25,7 +25,7 @@
 </mat-form-field>
 <mat-form-field>
   <mat-select placeholder="Académie" [(ngModel)]="selectedAcademy">
-    <mat-option [value]="undefined">{{'Ne pas définir'}}</mat-option>
+    <mat-option [value]="undefined" (click)="handler_academy(value)">{{'Ne pas définir'}}</mat-option>
     <mat-option *ngFor="let option of academies" [value]="option.aca_etab_lib" (click)="handler_academy(option)">
       {{option.aca_etab_lib}}
     </mat-option>
@@ -33,7 +33,7 @@
 </mat-form-field>
 <mat-form-field>
   <mat-select placeholder="Région" [(ngModel)]="selectedRegion">
-    <mat-option [value]="undefined">{{'Ne pas définir'}}</mat-option>
+    <mat-option [value]="undefined" (click)="handler_region(value)">{{'Ne pas définir'}}</mat-option>
     <mat-option *ngFor="let option of regions" [value]="option.reg_ins_lib" (click)="handler_region(option)">
       {{option.reg_ins_lib}}
     </mat-option>
@@ -41,7 +41,7 @@
 </mat-form-field>
 <mat-form-field>
   <mat-select placeholder="Département" [(ngModel)]="selectedDepartment">
-    <mat-option [value]="undefined">{{'Ne pas définir'}}</mat-option>
+    <mat-option [value]="undefined" (click)="handler_department(value)">{{'Ne pas définir'}}</mat-option>
     <mat-option *ngFor="let option of departments" [value]="option.dep_ins_lib" (click)="handler_department(option)">
       {{option.dep_ins_lib}}
     </mat-option>
@@ -49,7 +49,7 @@
 </mat-form-field>
 <mat-form-field>
   <mat-select placeholder="Ville" [(ngModel)]="selectedCity">
-    <mat-option [value]="undefined">{{'Ne pas définir'}}</mat-option>
+    <mat-option [value]="undefined" (click)="handler_city(value)">{{'Ne pas définir'}}</mat-option>
     <mat-option *ngFor="let option of cities" [value]="option.uucr_ins_lib" (click)="handler_city(option)">
       {{option.uucr_ins_lib}}
     </mat-option>
