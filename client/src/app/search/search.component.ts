@@ -117,6 +117,13 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   saveSchools() {
+    let cpt = 0;
+    for(let item of this.resSearch) {
+      if(item.checked) {
+         cpt++;
+      }
+    }
+
     for(let item of this.resSearch) {
       if(item.checked) {
         let school = {school_name: item.school_name, main_field: item.main_field, sub_field: item.sub_field, academy: item.academy, region: item.region, department: item.department, city: item.city, type_diploma: item.type_diploma, diploma_name: item.diploma_name};
@@ -124,6 +131,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
         this.http.post('http://localhost:3000/school', school)
        .subscribe((res: any) =>{
           console.log(res);
+          cpt--;
+          if(cpt <= 0)
+            this.router.navigate(['/schools']);
         }); 
       }
     }

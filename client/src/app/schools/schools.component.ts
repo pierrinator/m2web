@@ -33,15 +33,24 @@ export class SchoolsComponent implements OnInit {
 
   deleteSchools() {
     let url = 'http://localhost:3000/school/';
+    let cpt = 0;
+
+    for(let item of this.schools) {
+      if(item.checked) {
+         cpt++;
+      }
+    }
     for(let item of this.schools) {
       if(item.checked) {
         this.http.delete(url+item.school_id)
        .subscribe((res: any[]) =>{
-          
+          cpt--;
+          if(cpt <= 0)
+            this.getAllSchools();
         }); 
       }
     }
-    this.getAllSchools();
+    
 
   }
 
