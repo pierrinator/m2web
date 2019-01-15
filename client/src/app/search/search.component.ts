@@ -61,7 +61,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   private url =  `https://data.enseignementsup-recherche.gouv.fr/api/v2/catalog/datasets/fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics/aggregates?select=`;
 
   displayedColumns: string[] = ['checked', 'school_name', 'main_field', 'sub_field', 'academy',
-   'region', 'department', 'city', 'type_diploma', 'diploma_name'];
+   'region', 'department', 'city', 'type_diploma', 'diploma_name', 'actions'];
 
    static initOptions = false;
 
@@ -137,6 +137,11 @@ export class SearchComponent implements OnInit, AfterViewInit {
         }); 
       }
     }
+  }
+
+  localize(s: Search) {
+    console.log(s.school_name);
+    console.log(s.city);
   }
 
   ngOnInit() {
