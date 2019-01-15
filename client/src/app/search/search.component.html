@@ -136,21 +136,12 @@
 <mat-card-actions>
   <button mat-raised-button (click)="saveSchools()" color="primary">Sauvegarder</button>  
 </mat-card-actions>
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)"></agm-map>
+<div class="container">
+  <div class="form-group">
+    <input id=searchid placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+  </div>
+  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
+</div>
 
-<div class="storelocator-panel">
-
-    <form class="storelocator-filter">
-        <div class="location-search">
-          <input 
-            type="text"
-            placeholder="Find a store" 
-            autocorrect="off"
-            autocapitalize="off"
-            spellcheck="off"
-            autocomplete="off"
-            #search     [formControl]="searchControl">
-        </div>
-      </form>
-
-    </div>
