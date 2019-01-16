@@ -13,7 +13,10 @@ var LoginUser = {
     			if(!isPasswordValid)
     				callback(new Error('The password is wrong'));
     			else {
-    				return db.query('select * from user where user_name=?', User.username, callback);	
+    				let access_token = jwt.sign({id: result[0].user_id}, 'super secret', {expiresIn: 86400}); // dure 24h
+    				let res = {access_token: access_token, id: result[0].user_id};
+    				
+    				return callback(null, res);
     			}
     		} 
   		});
