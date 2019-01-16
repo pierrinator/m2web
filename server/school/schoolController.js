@@ -32,7 +32,10 @@ router.post('/', function (req, res) {
     School.createschool(req.body,function(err,success){
         if(err)
         {
-            res.status(500).json(err);
+            if(err == 'Error: This already exists')
+                res.status(208).json({ message: err.message });
+            else
+                res.status(500).json(err);
         }
         else{
             res.status(201).json(success);
