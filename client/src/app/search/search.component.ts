@@ -63,7 +63,8 @@ export class SearchComponent implements OnInit {
 
    static initOptions = false;
 
-  constructor(private http: HttpClient, private ngZone: NgZone, private mapsAPILoader: MapsAPILoader, private router: Router) {
+  constructor(private myElement: ElementRef, private http: HttpClient, private ngZone: NgZone,
+     private mapsAPILoader: MapsAPILoader, private router: Router) {
        }
 
   filter() {
@@ -136,7 +137,9 @@ export class SearchComponent implements OnInit {
   }
 
   localize(s: Search) {
-    this.searchControl.setValue(s.city);
+    this.searchControl.setValue(s.school_name);
+    let el = this.myElement.nativeElement.querySelector('map');
+    el.scrollIntoView();
   }
 
   ngOnInit() {
