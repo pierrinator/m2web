@@ -23,12 +23,13 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './auth-guard.service';
+import { RedirectLoginService } from './redirect-login.service';
 
 
 const appRoutes: Routes = [
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate: [RedirectLoginService]},
   {path: 'search', component: SearchComponent},
-  {path: 'user', component: UserComponent},
+  {path: 'account', component: AccountComponent, canActivate: [AuthGuardService]},
   {path: 'schools', component: SchoolsComponent, canActivate: [AuthGuardService]}
 
 
@@ -82,7 +83,7 @@ const appRoutes: Routes = [
     NgbModule.forRoot() // <---
   ],
   providers: [
-    GoogleMapsAPIWrapper, AuthGuardService
+    GoogleMapsAPIWrapper, AuthGuardService, RedirectLoginService
   ],
   bootstrap: [AppComponent]
 })
