@@ -116,7 +116,7 @@ export class SearchComponent implements OnInit {
 
   saveSchools() {
     if (this.auth.loggedIn()!=true){
-      return alert('Impossible de sauvegarder : vous n\'etes pas connecté.');
+      return alert('Impossible de sauvegarder : vous n\'êtes pas connecté.');
     }
     let cpt = 0;
     for(let item of this.resSearch) {
@@ -127,7 +127,7 @@ export class SearchComponent implements OnInit {
 
     for(let item of this.resSearch) {
       if(item.checked) {
-        let school = {school_name: item.school_name, main_field: item.main_field, sub_field: item.sub_field, academy: item.academy, region: item.region, department: item.department, city: item.city, type_diploma: item.type_diploma, diploma_name: item.diploma_name};
+        let school = {school_name: item.school_name, main_field: item.main_field, sub_field: item.sub_field, academy: item.academy, region: item.region, department: item.department, city: item.city, type_diploma: item.type_diploma, diploma_name: item.diploma_name, user_id: this.auth.getId()};
 
         this.http.post('http://localhost:3000/school', school)
        .subscribe((res: any) =>{

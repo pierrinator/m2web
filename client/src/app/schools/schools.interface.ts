@@ -10,4 +10,5 @@ export interface School {
   city: string;
   type_diploma: string;
   diploma_name: string;
+  user_id: string;
 }

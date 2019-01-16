@@ -16,8 +16,8 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/:id', function (req, res) {
-    School.getschool(req.params.id,function(err,row){
+router.get('/:user_id', function (req, res) {
+    School.getschool(req.params.user_id,function(err,row){
         if(err) {
             res.status(500).json(err);
         }

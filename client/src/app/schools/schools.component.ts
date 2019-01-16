@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {SelectionModel} from '@angular/cdk/collections';
 import {School} from './schools.interface';
+import { JwtService } from '../jwt.service';
 
 @Component({
   selector: 'app-schools',
@@ -16,15 +17,15 @@ export class SchoolsComponent implements OnInit {
   displayedColumns: string[] = ['checked', 'school_name', 'main_field', 'sub_field', 'academy',
    'region', 'department', 'city', 'type_diploma', 'diploma_name'];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private auth: JwtService) { }
 
   getAllSchools() {
-    this.http.get(`http://localhost:3000/school`)
+    this.http.get(`http://localhost:3000/school/`+this.auth.getId())
     .subscribe((res: any[]) =>{
       this.schools = [];
       let schoolsGet = res;
       for(let item of schoolsGet) {
-        let school = {checked: false, school_id: item.school_id, school_name: item.school_name, main_field: item.main_field, sub_field: item.sub_field, academy: item.academy, region: item.region, department: item.department, city: item.city, type_diploma: item.type_diploma, diploma_name: item.diploma_name};
+        let school = {checked: false, school_id: item.school_id, school_name: item.school_name, main_field: item.main_field, sub_field: item.sub_field, academy: item.academy, region: item.region, department: item.department, city: item.city, type_diploma: item.type_diploma, diploma_name: item.diploma_name, user_id: item.user_id};
 
         this.schools.push(school);
       }
