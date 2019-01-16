@@ -29,6 +29,7 @@ export class JwtService {
   register(username: String, password: String) {
     return this.httpClient.post('http://localhost:3000/register', {'username': username, 'password': password})
     .subscribe((res: any) =>{
+        return alert('L\'utilisateur a été créé avec succès. Vous pouvez maintenant vous connecter.');    
      },
      (error: any) =>{
         if(error.error.message == 'The user already exists') 
