@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'admin',
     password : 'root',
-    database : 'phpmyadmin'
+    database : 'm2web'
 });
 
 
