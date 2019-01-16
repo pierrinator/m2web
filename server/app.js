@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 
 var schoolController = require('./school/schoolController');
-var userController = require('./user/userController');
+var registerController = require('./register/registerController');
 function myCors(req, res, nxt) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
@@ -17,6 +17,6 @@ function myCors(req, res, nxt) {
 }
 app.use(myCors);
 app.use('/school', schoolController);
-app.use('/login', userController);
+app.use('/register', registerController);
 
 module.exports = app;

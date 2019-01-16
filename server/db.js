@@ -25,6 +25,15 @@ connection.connect(function(err) {
     			}
   			});
 
+    connection.query(
+            'Create table IF NOT EXISTS user (user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,\
+            user_name VARCHAR(80) NOT NULL, password VARCHAR(100) NOT NULL)\
+            ENGINE=INNODB', function(err, results, fields) {
+          if (err) {
+              console.log(err.message);
+          }
+        });
+
   });
   
 
