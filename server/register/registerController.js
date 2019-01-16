@@ -8,7 +8,10 @@ router.post('/', function (req, res) {
     RegisterUser.createUser(req.body,function(err,success){
         if(err)
         {
-            res.status(500).json(err);
+        	if(err == 'Error: The user already exists')
+        		res.status(403).json({ message: err.message });
+        	else
+            	res.status(500).json(err);
         }
         else{
             res.status(201).json(success);
