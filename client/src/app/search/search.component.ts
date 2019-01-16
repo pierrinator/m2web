@@ -1,10 +1,7 @@
 /// <reference types="@types/googlemaps" />
-
 import { Component, Input, ViewChild, NgZone, OnInit, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
-import {SelectionModel} from '@angular/cdk/collections';
-import {MatTableDataSource} from '@angular/material';
 import {Search} from './search.interface';
 import {Router} from '@angular/router';
 import { MapsAPILoader, MouseEvent } from '@agm/core';

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {SelectionModel} from '@angular/cdk/collections';
 import {School} from './schools.interface';
 import { JwtService } from '../jwt.service';
 
