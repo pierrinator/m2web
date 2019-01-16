@@ -8,6 +8,7 @@ import {MatTableDataSource} from '@angular/material';
 import {Search} from './search.interface';
 import {Router} from '@angular/router';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
+import { JwtService } from '../jwt.service';
 
 
 
@@ -64,7 +65,7 @@ export class SearchComponent implements OnInit {
    static initOptions = false;
 
   constructor(private myElement: ElementRef, private http: HttpClient, private ngZone: NgZone,
-     private mapsAPILoader: MapsAPILoader, private router: Router) {
+     private mapsAPILoader: MapsAPILoader, private router: Router, private auth: JwtService) {
        }
 
   filter() {
@@ -114,6 +115,9 @@ export class SearchComponent implements OnInit {
   }
 
   saveSchools() {
+    if (this.auth.loggedIn()!=true){
+      return alert('Impossible de sauvegarder : vous n\'etes pas connecté.');
+    }
     let cpt = 0;
     for(let item of this.resSearch) {
       if(item.checked) {

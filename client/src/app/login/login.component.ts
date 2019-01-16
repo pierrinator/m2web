@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { JwtService } from '../jwt.service';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +7,30 @@ import { Observable } from 'rxjs';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent {
-  private password: string;
-  private username: string;
+export class LoginComponent implements OnInit {
 
-  constructor() { }
+  private username: String;
+  private password: String;
+
+  constructor(private jwtservice: JwtService) { }
 
   login() {
+    if (this.username == null || this.password == null){
+      return alert('Vous devez rentrer un nom d\'utilisateur et un mot de passe');
+    }
+    this.jwtservice.login(this.username, this.password);
+   }
+  register() {
+    if (this.username == null || this.password == null){
+      return alert('Vous devez rentrer un nom d\'utilisateur et un mot de passe');
+    }
+    console.log(this.jwtservice.register(this.username, this.password));
+   }
+   logout() {
+    this.jwtservice.logout();
    }
 
+   ngOnInit(){
+     console.log(this.jwtservice.loggedIn());
+   }
 }

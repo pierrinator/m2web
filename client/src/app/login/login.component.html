@@ -8,13 +8,13 @@
           <tr>
             <td>
               <mat-form-field class="example-full-width">
-              <input matInput placeholder="Nom d'utilisateur" [(ngModel)]="username" name="username" required>
+              <input id="user" matInput placeholder="Nom d'utilisateur" [(ngModel)]="username" name="username" required>
               </mat-form-field>
             </td>
           </tr>
           <tr>
           <td><mat-form-field class="example-full-width">
-            <input matInput placeholder="Mot de passe" [(ngModel)]="password"type="password" name="password" required>
+            <input id="pass" matInput placeholder="Mot de passe" [(ngModel)]="password"type="password" name="password" required>
           </mat-form-field></td>
         </tr></table>
       </form>
@@ -22,6 +22,12 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button (click)="login()" color="primary">Connexion</button>
+    </mat-card-actions>
+    <mat-card-actions>
+      <button mat-raised-button (click)="register()" color="primary">S'enregistrer</button>
+    </mat-card-actions>
+    <mat-card-actions>
+      <button mat-raised-button (click)="logout()" color="primary">Déconnexion</button>
     </mat-card-actions>
   </mat-card>
   
