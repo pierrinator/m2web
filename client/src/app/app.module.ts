@@ -11,7 +11,7 @@ import {MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule,
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AccountComponent } from './account/account.component';
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes, CanActivate} from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,13 +21,15 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SchoolsComponent } from './schools/schools.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthGuardService } from './auth-guard.service';
 
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'search', component: SearchComponent},
   {path: 'user', component: UserComponent},
-  {path: 'schools', component: SchoolsComponent}
+  {path: 'schools', component: SchoolsComponent, canActivate: [AuthGuardService]}
 
 
 ];
@@ -64,6 +66,14 @@ const appRoutes: Routes = [
     MatAutocompleteModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function  tokenGetter() {
+             return     localStorage.getItem('access_token');},
+        whitelistedDomains: ['localhost:3000'],
+        blacklistedRoutes: ['http://localhost:3000/auth/login']
+      }
+    }),
     RouterModule.forRoot(appRoutes),
     AgmCoreModule.forRoot({
       apiKey: '',
@@ -72,7 +82,7 @@ const appRoutes: Routes = [
     NgbModule.forRoot() // <---
   ],
   providers: [
-    GoogleMapsAPIWrapper
+    GoogleMapsAPIWrapper, AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
