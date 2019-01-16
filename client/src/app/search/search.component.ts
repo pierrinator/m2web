@@ -127,7 +127,6 @@ export class SearchComponent implements OnInit {
 
         this.http.post('http://localhost:3000/school', school)
        .subscribe((res: any) =>{
-          console.log(res);
           cpt--;
           if(cpt <= 0)
             this.router.navigate(['/schools']);
