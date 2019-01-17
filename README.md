@@ -51,3 +51,9 @@ Contient tout le code du client. Voici les fichiers/dossiers d'intérêt:
 - src/app/app.module.ts : contient un certain nombre d'imports, la déclaration des modules et de certains services
 
 Le dossier contient également tout les autres fichiers générés pour faire fonctionner Angular.
+
+Sécurité
+--------------
+Pour des raisons de sécurité évidentes, les références a la base de données et clés API ont étés masquées. Ainsi, pour faire fonctionner le site, il faut renseigner :
+- L'adresse d'une base de données MySQL valide en ligne 3 du fichier server/db.js
+- Une clé API Google Maps + Places en ligne 80 du fichier client/src/app/app.module.ts
