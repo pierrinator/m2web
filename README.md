@@ -4,7 +4,7 @@ Projet M2 Web
 Notice d'utilisation
 --------------------
 - Veuillez accéder à cet URL : https://dry-dusk-68919.herokuapp.com
-- Ensuite, il vous faut créer un compte dans la rubrique 'Mon Compte' sans quoi vous n'aurez pas accès à la sauvegarde des écoles.
+- Ensuite, il vous faut créer un compte dans la rubrique 'Mon Compte' sans quoi vous n'aurez pas accès à la sauvegarde des écoles. Il suffit de remplir les champs et de cliquer sur 'S'enregistrer', attendre que le site indique la création de l'utilisateur. Vous pouvez ensuite appuyer sur 'Connexion' pour accéder à toutes les fonctionnalités. Merci de retenir votre nom d'utilisateur et votre mot de passe sans quoi vous devrez en recréer un et vous perdrez vos écoles sauvegardées.
 - La rubrique 'Recherche d'écoles' permet de rechercher des écoles selon plusieurs filtres indiqués. 
 - Après que le bouton 'Rechercher' est cliqué, un certain nombre d'écoles s'affichera sous la forme de tableau.
 - Vous pouvez utiliser le bouton 'Localiser' pour vous amener sur la carte Googlemap. Il vous faudra cliquer sur le champ de saisie juste au dessus de la carte et choisir l'un des choix proposés par Googlemap (le premier choix est le bon).
