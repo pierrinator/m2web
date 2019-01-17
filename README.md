@@ -53,8 +53,8 @@ Contient tout le code du client. Voici les fichiers/dossiers d'intérêt:
 Le dossier contient également tout les autres fichiers générés pour faire fonctionner Angular.
 
 Sécurité et mise en place
---------------
-Pour des raisons de sécurité évidentes, les références a la base de données et clés API ont étés masquées. Ainsi, pour faire fonctionner le site, il faut renseigner :
+-------------------------
+Pour des raisons de sécurité évidentes, les références à la base de données et aux clés API ont été masquées. Ainsi, pour faire fonctionner le site, il faut renseigner :
 - L'adresse d'une base de données MySQL valide en ligne 3 du fichier server/db.js
 - Une clé API Google Maps + Places en ligne 80 du fichier client/src/app/app.module.ts
-Attention, si vous souhaitez mettre en place votre propre back-end a l'aide de ce code, n'oubliez pas de changer les URL de GET/POST dans les fichiers suivants : client/src/app/jwt-service.js, client/src/app/schools/schools.component.ts ainsi qu'a la ligne 131 de client/src/app/search/search.component.ts
+- Attention ! Si vous souhaitez mettre en place votre propre back-end à l'aide de ce code, n'oubliez pas de changer les URL des requêtes GET/POST/DELETE sur notre API dans les fichiers suivants : client/src/app/jwt-service.js, client/src/app/schools/schools.component.ts ainsi qu'a la ligne 131 de client/src/app/search/search.component.ts
