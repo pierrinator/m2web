@@ -16,6 +16,8 @@ import { JwtService } from '../jwt.service';
 })
 export class SearchComponent implements OnInit {
 
+  value;
+
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
@@ -25,23 +27,23 @@ export class SearchComponent implements OnInit {
   @ViewChild("search")
   public searchElementRef: ElementRef;
  
-  private selectedName: string;
-  private selectedMainfield: string;
-  private selectedSubfield: string;
-  private selectedAcademy: string;
-  private selectedRegion: string;
-  private selectedDepartment: string;
-  private selectedCity: string;
-  private selectedDiplomaT: string;
+  public selectedName: string;
+  public selectedMainfield: string;
+  public selectedSubfield: string;
+  public selectedAcademy: string;
+  public selectedRegion: string;
+  public selectedDepartment: string;
+  public selectedCity: string;
+  public selectedDiplomaT: string;
   
-  private names  = [];
-  private mainfields  = [];
-  private subfields  = [];
-  private academies  = [];
-  private regions  = [];
-  private departments  = [];
-  private cities  = [];
-  private diploma_types  = [];
+  public names  = [];
+  public mainfields  = [];
+  public subfields  = [];
+  public academies  = [];
+  public regions  = [];
+  public departments  = [];
+  public cities  = [];
+  public diploma_types  = [];
 
   static initNames  = [];
   static initMainfields  = [];
@@ -52,7 +54,7 @@ export class SearchComponent implements OnInit {
   static initCities  = [];
   static initDiploma_types  = [];
 
-  private resSearch: Search[] = [];
+  public resSearch: Search[] = [];
 
   private url =  `https://data.enseignementsup-recherche.gouv.fr/api/v2/catalog/datasets/fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics/aggregates?select=`;
 

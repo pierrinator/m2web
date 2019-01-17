@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
 
-  private username: String;
-  private password: String;
+  public username: String;
+  public password: String;
+  showSpinner;
 
   constructor(private jwtservice: JwtService, private router: Router) { }
 

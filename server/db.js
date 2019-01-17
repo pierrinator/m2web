@@ -1,18 +1,12 @@
 const mysql   = require('mysql');
 
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'admin',
-    password : 'root',
-    database : 'm2web'
-});
-
+var connection = mysql.createConnection('xxxx');
 
 connection.connect(function(err) {
     if (err) {
       return console.error('error: ' + err.message);
     }
-   
+    
     console.log('Connected to the MySQL server.');
     connection.query(
             'Create table IF NOT EXISTS user (user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,\
@@ -35,5 +29,8 @@ connection.connect(function(err) {
 
   });
   
-
+setInterval(function () {
+    connection.query('SELECT 1');
+}, 30000);
+  
 module.exports=connection;

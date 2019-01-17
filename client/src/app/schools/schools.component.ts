@@ -11,7 +11,7 @@ import { JwtService } from '../jwt.service';
 
 export class SchoolsComponent implements OnInit {
 
-  private schools: School[] = [];
+  public schools: School[] = [];
 
   displayedColumns: string[] = ['checked', 'school_name', 'main_field', 'sub_field', 'academy',
    'region', 'department', 'city', 'type_diploma', 'diploma_name'];

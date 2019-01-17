@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -12,18 +13,21 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AccountComponent } from './account/account.component';
 import {RouterModule, Routes, CanActivate} from '@angular/router';
-import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material';
 import { SearchComponent } from './search/search.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { SchoolsComponent } from './schools/schools.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './auth-guard.service';
 import { RedirectLoginService } from './redirect-login.service';
+
+export function jwtTokenGetter() {
+  return localStorage.getItem('access_token');;
+}
 
 
 const appRoutes: Routes = [
@@ -40,7 +44,6 @@ const appRoutes: Routes = [
     AppComponent,
     DashboardComponent,
     AccountComponent,
-    UserComponent,
     LoginComponent,
     SchoolsComponent,
     SearchComponent
@@ -69,10 +72,7 @@ const appRoutes: Routes = [
     MatProgressSpinnerModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: function  tokenGetter() {
-             return     localStorage.getItem('access_token');},
-        whitelistedDomains: ['localhost:3000'],
-        blacklistedRoutes: ['http://localhost:3000/auth/login']
+        tokenGetter: jwtTokenGetter
       }
     }),
     RouterModule.forRoot(appRoutes),
@@ -87,4 +87,5 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
