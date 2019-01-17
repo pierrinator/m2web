@@ -10,7 +10,7 @@ export class JwtService {
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   login(username: String, password: String) {
-    return this.httpClient.post('http://localhost:3000/login', {'username': username, 'password': password})
+    return this.httpClient.post('https://frozen-dusk-46362.herokuapp.com/login', {'username': username, 'password': password})
     .subscribe((res: any) =>{
       localStorage.setItem('access_token', res.access_token);
       localStorage.setItem('id', res.id);
@@ -27,7 +27,7 @@ export class JwtService {
   }
 
   register(username: String, password: String) {
-    return this.httpClient.post('http://localhost:3000/register', {'username': username, 'password': password})
+    return this.httpClient.post('https://frozen-dusk-46362.herokuapp.com/register', {'username': username, 'password': password})
     .subscribe((res: any) =>{
         return alert('L\'utilisateur a été créé avec succès. Vous pouvez maintenant vous connecter.');    
      },

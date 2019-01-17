@@ -126,7 +126,7 @@ export class SearchComponent implements OnInit {
       if(item.checked) {
         let school = {school_name: item.school_name, main_field: item.main_field, sub_field: item.sub_field, academy: item.academy, region: item.region, department: item.department, city: item.city, type_diploma: item.type_diploma, diploma_name: item.diploma_name, user_id: this.auth.getId()};
 
-        this.http.post('http://localhost:3000/school', school)
+        this.http.post('https://frozen-dusk-46362.herokuapp.com/school', school)
        .subscribe((res: any) =>{
           cpt--;
           if(cpt <= 0)

@@ -19,7 +19,7 @@ export class SchoolsComponent implements OnInit {
   constructor(private http: HttpClient, private auth: JwtService) { }
 
   getAllSchools() {
-    this.http.get(`http://localhost:3000/school/`+this.auth.getId())
+    this.http.get(`https://frozen-dusk-46362.herokuapp.com/school/`+this.auth.getId())
     .subscribe((res: any[]) =>{
       this.schools = [];
       let schoolsGet = res;
@@ -32,7 +32,7 @@ export class SchoolsComponent implements OnInit {
   }
 
   deleteSchools() {
-    let url = 'http://localhost:3000/school/';
+    let url = 'https://frozen-dusk-46362.herokuapp.com/school/';
     let cpt = 0;
 
     for(let item of this.schools) {
