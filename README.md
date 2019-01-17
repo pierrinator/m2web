@@ -1,6 +1,16 @@
 Projet M2 Web
 =============
 
+Notice d'utilisation
+--------------------
+- Veuillez accéder à cet URL : https://dry-dusk-68919.herokuapp.com
+- Ensuite, il vous faut créer un compte dans la rubrique 'Mon Compte' sans quoi vous n'aurez pas accès à la sauvegarde des écoles.
+- La rubrique 'Recherche d'écoles' permet de rechercher des écoles selon plusieurs filtres indiqués. 
+- Après que le bouton 'Rechercher' est cliqué, un certain nombre d'écoles s'affichera sous la forme de tableau.
+- Vous pouvez utiliser le bouton 'Localiser' pour vous amener sur la carte Googlemap. Il vous faudra cliquer sur le champ de saisie juste au dessus de la carte et choisir l'un des choix proposés par Googlemap (le premier choix est le bon).
+- Enfin vous pouvez cocher une ou plusieurs écoles qui vous intéressent dans le tableau et appuyer sur 'Sauvegarder' pour les sauvegarder dans la base de données. Vous serez redirigé vers la dernière rubrique.
+- La rubrique 'Ecoles sauvegardées' permet de visualiser les écoles que vous (et seulement vous) avez sauvegardé dans la base. Vous pouvez cocher une ou plusieurs écoles et cliquer sur 'Supprimer' afin de les retirer des écoles sauvegardées. Bien sûr, vous pourrez toujours les rechercher à nouveau et les resauvegarder.
+
 Documentation swagger
 ---------------------
 Présente sous 3 formes dans le dossier 'Doc_swagger':
