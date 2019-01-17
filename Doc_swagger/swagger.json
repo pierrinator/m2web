@@ -1,0 +1,443 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1",
+    "title" : "Projet_Web_DUVERNEIX_LORSON"
+  },
+  "host" : "frozen-dusk-46362.herokuapp.com",
+  "basePath" : "/",
+  "tags" : [ {
+    "name" : "school",
+    "description" : "Operations about school"
+  }, {
+    "name" : "user",
+    "description" : "Operations about user"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/school" : {
+      "get" : {
+        "tags" : [ "school" ],
+        "summary" : "Get schools",
+        "operationId" : "getschools",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "list of schools",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "school_id" : {
+                    "type" : "string",
+                    "example" : "1"
+                  },
+                  "school_name" : {
+                    "type" : "string",
+                    "example" : "Aix-Marseille Université"
+                  },
+                  "main_field" : {
+                    "type" : "string",
+                    "example" : "Droit, sciences économiques, AES"
+                  },
+                  "sub_field" : {
+                    "type" : "string",
+                    "example" : "Droit, sciences politiques"
+                  },
+                  "academy" : {
+                    "type" : "string",
+                    "example" : "Aix-Marseille"
+                  },
+                  "region" : {
+                    "type" : "string",
+                    "example" : "Provence-Alpes-Côte d'Azur"
+                  },
+                  "department" : {
+                    "type" : "string",
+                    "example" : "Bouches-du-Rhône"
+                  },
+                  "city" : {
+                    "type" : "string",
+                    "example" : "Marseille - Aix-en-Provence"
+                  },
+                  "type_diploma" : {
+                    "type" : "string",
+                    "example" : "Diplômes d'établissement"
+                  },
+                  "diploma_name" : {
+                    "type" : "string",
+                    "example" : "DIPLOMES D'UNIVERSITE EN SCIENCES JURIDIQUES - BAC+3 A BAC+5"
+                  },
+                  "user_id" : {
+                    "type" : "string",
+                    "example" : "1"
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "error with Mysql"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "school" ],
+        "summary" : "Create school",
+        "description" : "Create a school",
+        "operationId" : "createschool",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "school",
+          "description" : "School we want to create",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/bodySchool"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Callback of mySql for the school created",
+            "schema" : {
+              "$ref" : "#/definitions/callbackMysql20X"
+            }
+          },
+          "208" : {
+            "description" : "This already exist"
+          },
+          "500" : {
+            "description" : "error with Mysql"
+          }
+        }
+      }
+    },
+    "/school/{param_id}" : {
+      "get" : {
+        "tags" : [ "school" ],
+        "summary" : "Get schools",
+        "operationId" : "getschoolbyid",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "param_id",
+          "in" : "path",
+          "description" : "Id of the user related to the schools we want to get",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "list of schools",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "school_id" : {
+                    "type" : "string",
+                    "example" : "1"
+                  },
+                  "school_name" : {
+                    "type" : "string",
+                    "example" : "Aix-Marseille Université"
+                  },
+                  "main_field" : {
+                    "type" : "string",
+                    "example" : "Droit, sciences économiques, AES"
+                  },
+                  "sub_field" : {
+                    "type" : "string",
+                    "example" : "Droit, sciences politiques"
+                  },
+                  "academy" : {
+                    "type" : "string",
+                    "example" : "Aix-Marseille"
+                  },
+                  "region" : {
+                    "type" : "string",
+                    "example" : "Provence-Alpes-Côte d'Azur"
+                  },
+                  "department" : {
+                    "type" : "string",
+                    "example" : "Bouches-du-Rhône"
+                  },
+                  "city" : {
+                    "type" : "string",
+                    "example" : "Marseille - Aix-en-Provence"
+                  },
+                  "type_diploma" : {
+                    "type" : "string",
+                    "example" : "Diplômes d'établissement"
+                  },
+                  "diploma_name" : {
+                    "type" : "string",
+                    "example" : "DIPLOMES D'UNIVERSITE EN SCIENCES JURIDIQUES - BAC+3 A BAC+5"
+                  },
+                  "user_id" : {
+                    "type" : "string",
+                    "example" : "1"
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "error with Mysql"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "school" ],
+        "summary" : "Delete school",
+        "description" : "Delete a school",
+        "operationId" : "deleteschool",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "param_id",
+          "in" : "path",
+          "description" : "Id of the school to delete",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "school deleted",
+            "schema" : {
+              "$ref" : "#/definitions/callbackMysql20X"
+            }
+          },
+          "500" : {
+            "description" : "error with Mysql"
+          }
+        }
+      }
+    },
+    "/register" : {
+      "post" : {
+        "tags" : [ "user" ],
+        "summary" : "Create user",
+        "description" : "Create a user",
+        "operationId" : "createuser",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "user",
+          "description" : "User we want to create",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/bodyUser"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Callback of mySql for the user created.",
+            "schema" : {
+              "$ref" : "#/definitions/callbackMysql20X"
+            }
+          },
+          "403" : {
+            "description" : "The user already exists"
+          },
+          "500" : {
+            "description" : "error with Mysql"
+          }
+        }
+      }
+    },
+    "/login" : {
+      "post" : {
+        "tags" : [ "user" ],
+        "summary" : "Login user",
+        "description" : "Create a token to login the user",
+        "operationId" : "loginuser",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "user",
+          "description" : "User we want to login",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/bodyUser"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "token to be used to authorise and keep connection and id of the user authorised",
+            "schema" : {
+              "$ref" : "#/definitions/login"
+            }
+          },
+          "403" : {
+            "description" : "The user doesnt exist or The password is wrong"
+          },
+          "500" : {
+            "description" : "error with Mysql"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "bodySchool" : {
+      "type" : "object",
+      "properties" : {
+        "school_name" : {
+          "type" : "string",
+          "example" : "Aix-Marseille Université"
+        },
+        "main_field" : {
+          "type" : "string",
+          "example" : "Droit, sciences économiques, AES"
+        },
+        "sub_field" : {
+          "type" : "string",
+          "example" : "Droit, sciences politiques"
+        },
+        "academy" : {
+          "type" : "string",
+          "example" : "Aix-Marseille"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "Provence-Alpes-Côte d'Azur"
+        },
+        "department" : {
+          "type" : "string",
+          "example" : "Bouches-du-Rhône"
+        },
+        "city" : {
+          "type" : "string",
+          "example" : "Marseille - Aix-en-Provence"
+        },
+        "type_diploma" : {
+          "type" : "string",
+          "example" : "Diplômes d'établissement"
+        },
+        "diploma_name" : {
+          "type" : "string",
+          "example" : "DIPLOMES D'UNIVERSITE EN SCIENCES JURIDIQUES - BAC+3 A BAC+5"
+        },
+        "user_id" : {
+          "type" : "string",
+          "example" : "1"
+        }
+      }
+    },
+    "callbackMysql20X" : {
+      "type" : "object",
+      "properties" : {
+        "fieldCount" : {
+          "type" : "string",
+          "example" : "0"
+        },
+        "affectedRows" : {
+          "type" : "string",
+          "example" : "1"
+        },
+        "insertId" : {
+          "type" : "string",
+          "example" : "0"
+        },
+        "serverStatus" : {
+          "type" : "string",
+          "example" : "2"
+        },
+        "warningCount" : {
+          "type" : "string",
+          "example" : "0"
+        },
+        "message" : {
+          "type" : "string",
+          "example" : ""
+        },
+        "protocol41" : {
+          "type" : "string",
+          "example" : "true"
+        },
+        "changedRows" : {
+          "type" : "string",
+          "example" : "0"
+        }
+      }
+    },
+    "bodyUser" : {
+      "type" : "object",
+      "properties" : {
+        "username" : {
+          "type" : "string",
+          "example" : "mduv"
+        },
+        "password" : {
+          "type" : "string",
+          "example" : "super_password"
+        }
+      }
+    },
+    "login" : {
+      "type" : "object",
+      "properties" : {
+        "access_token" : {
+          "type" : "string",
+          "example" : "xxxxxXXXx000x.xxxxXXXX000xxxx"
+        },
+        "id" : {
+          "type" : "string",
+          "example" : "1"
+        }
+      }
+    },
+    "inline_response_200" : {
+      "properties" : {
+        "school_id" : {
+          "type" : "string",
+          "example" : "1"
+        },
+        "school_name" : {
+          "type" : "string",
+          "example" : "Aix-Marseille Université"
+        },
+        "main_field" : {
+          "type" : "string",
+          "example" : "Droit, sciences économiques, AES"
+        },
+        "sub_field" : {
+          "type" : "string",
+          "example" : "Droit, sciences politiques"
+        },
+        "academy" : {
+          "type" : "string",
+          "example" : "Aix-Marseille"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "Provence-Alpes-Côte d'Azur"
+        },
+        "department" : {
+          "type" : "string",
+          "example" : "Bouches-du-Rhône"
+        },
+        "city" : {
+          "type" : "string",
+          "example" : "Marseille - Aix-en-Provence"
+        },
+        "type_diploma" : {
+          "type" : "string",
+          "example" : "Diplômes d'établissement"
+        },
+        "diploma_name" : {
+          "type" : "string",
+          "example" : "DIPLOMES D'UNIVERSITE EN SCIENCES JURIDIQUES - BAC+3 A BAC+5"
+        },
+        "user_id" : {
+          "type" : "string",
+          "example" : "1"
+        }
+      }
+    }
+  }
+}
